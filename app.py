@@ -23,7 +23,7 @@ app = Flask(__name__)
 def index():
 	stre = session.query(Users).filter_by(name="Bob").one().stores[0]
 	items = session.query(Items).filter_by(store=stre).all()
-	return str(items[0].name)
+	return str(stre.id)
 
 @app.route('/user/new')
 def newUser():
@@ -114,7 +114,8 @@ def updateStore(userid, strid):
 
 @app.route('/user/<userid>/store/<storeid>/item/new')
 def newItem(userid,storeid):
-	return render_template('Items/form.html', user=userid ,store=storeid)
+	items = session.query(Items).filter_by(store_id=storeid).all()
+	return render_template('Items/form.html', user=userid ,store=storeid, itm=items)
 
 @app.route('/user/<userid>/store/<storeid>/item/create', methods=['POST'])
 def createItem(userid,storeid):

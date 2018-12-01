@@ -7,6 +7,7 @@
 {% if error %}
     <p class="alert alert-danger"><strong>Error:</strong> {{ error }}
 {% endif %}
+<div class="col-md-6">
 {% if item%}
 
 <h1>Edit Item</h1>
@@ -17,7 +18,7 @@
     
 
     <label>Item Description</label><br>
-    <input type="text" rows="4" cols="16" name='description' value="{{item.description}}"><br>
+    <input class = "description" type="text" rows="4" cols="16" name='description' value="{{item.description}}"><br>
     
 
     <label>Price</label><br>
@@ -38,7 +39,7 @@
   
 
     <label>Item Description</label><br>
-    <input type="text" rows="4" cols="16" name='description'><br>
+    <input class = "description" type="text" rows="4" cols="16" name='description'><br>
   
 
     <label>Price</label><br>
@@ -49,8 +50,32 @@
 </form>
 
 {%endif%}
+</div>
+<div class="col-md-6">
+{%if itm%}
+  <h2>Existing Items</h2>
 
-<div>
+  <table class='table'>
+    <tr>
+      <th>Item name</th>
+      <th>Item Description</th>
+      <th>Price</th>
+    </tr>
+{%for i in itm%}    
+    <tr>
+      <td>{{i.name}}</td>
+      <td>{{i.description}}</td>
+      <td>{{i.price}}</td>
+    </tr>
+{%endfor%}
+    </tr>
+  </table>
+{%endif%}
+</div>
+<div class="clearfix">
+
+</div>
+<div >
   <a href="{{url_for('index')}}">
     Back
   </a>

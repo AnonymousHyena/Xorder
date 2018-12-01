@@ -15,6 +15,11 @@ textarea.fixxxed {
 h2{
   clear: both;
 }
+input.description{
+  padding: 5px 400px 100px 5px;
+}
+
+table
 
 /*Header*/
 #header-nav {

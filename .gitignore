@@ -1,6 +1,6 @@
 .DS_Store
 
-pax.db
+name.db
 static/images/*
 !static/images/Jane Doe.*
 !static/images/logo.*
