@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% block title %}{% endblock %} - Facilis</title>
+    <title>{% block title %}{% endblock %} - Xorder</title>
     <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet" type='text/css'>
@@ -30,19 +30,15 @@
 
           <div id="collapsable-nav" class="collapse navbar-collapse">
            <ul id="nav-list" class="nav navbar-nav navbar-right">
-            <li id="navHomeButton" class="visible-xs">
-              <a href="/">
-                <span class="glyphicon glyphicon-home"></span> Home</a>
+            <li id="navLogInButton">
+              <a href="/"> Log In</a>
             </li>
-            <li id="navSessionStartButton">
-              
+            <li id="or">
+              or
+            </li> 
+            <li id="navSignUpButton">
+              <a href="/">Sign Up</a>
             </li>
-            {%if 'pax' in session%}
-              <li id="navSessionScrapButton">
-                <a href="/sess/scrap">
-                  <span class="glyphicon glyphicon-trash"></span><br class="hidden-xs"> Delete Session</a>
-              </li>
-            {%endif%}
            </ul>
           </div>
         </div><!-- .container -->
@@ -64,9 +60,15 @@
     
     <footer class="panel-footer">
         <div class="container">
+          <div class="row col-md-offset-4 col-md-4">
+            <div class="col-md-4 text-center footer_link">About</div>
+            <div class="col-md-4 text-center footer_link">Contact Us</div>
+            <div class="col-md-4 text-center footer_link">Blog</div>
+          </div>
+          <div class="clearfix"></div>
           <div class="row">
             <section class="text-center">
-              Made with <span class="glyphicon glyphicon-heart" style="color:red;font-size:0.7em;"></span> by Statics in Thessaloniki
+              Made with <span class="glyphicon glyphicon-heart" style="color:red;font-size:0.7em;"></span> by Dream Team in Thessaloniki
             </section>
           </div>
         </div> 
