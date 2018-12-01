@@ -30,7 +30,69 @@ th {
   border: 0px;
   font-weight: bold;
 }
+#image{
+  padding-left: 0px;
+}
+.form-style-8{
+	font-family: 'Source Sans Pro', sans-serif;
+	width: 500px;
+	padding: 30px;
+	background: rgba(255, 255, 255, 0);
+  /* margin: 50px auto; */
+  margin-top: 150px;
+  /* margin-right: 200px; */
+  margin-bottom: auto;
+  /* margin-left: 90px; */
+  
+  margin-right: auto;
+  margin-left: auto;
+	  
+}
 
+.form-style-8 input[type="text"],
+.form-style-8 input[type="email"],
+.form-style-8 input[type="password"],
+.form-style-8 select 
+{
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	outline: none;
+	display: block;
+	width: 100%;
+	padding: 7px;
+	border: none;
+	border-bottom: 1px solid #ddd;
+	background: transparent;
+	margin-bottom: 10px;
+	font: 16px Arial, Helvetica, sans-serif;
+  height: 30px;
+}
+.subtitle{
+  /* align-content: center;*/
+  font-size: 18px ; 
+  margin: 0;
+  position: relative;
+  top: 146px;
+  left: 25%;
+  /* -ms-transform: translateX(70%, 70%);
+  transform: translateX(20%, 20%); */
+  
+}
+.form-button{
+  font-size: 18px;
+  font-family: 'Source Sans Pro', sans-serif;
+  height: 50px;
+  width: 185px;
+  background-color: #43425D;
+  color: #FFFFFF;
+  margin: 0;
+  position: absolute;
+  top: 100%;
+  left: 265px;
+  -ms-transform: translateX(70%, 70%);
+  transform: translateX(20%, 20%);
+}
 /*Header*/
 #header-nav {
   background-color: #fff;

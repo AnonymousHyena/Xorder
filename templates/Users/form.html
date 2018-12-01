@@ -1,16 +1,31 @@
-{% extends "layout.html" %}
-{% block title %}Create Participant{% endblock %}
-{% block head %}
-  {{ super() }}
-{% endblock %}
-{% block content %}
+<!doctype html>
+<html lang="en">
+  <head>
+    {% block head %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% endblock %} - Xorder</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet" type='text/css'>
+    {% endblock %}
+  </head>
+  <body>
 {% if error %}
     <p class="alert alert-danger"><strong>Error:</strong> {{ error }}
 {% endif %}
+
+<div id="image" class="col-sm-6">
+  <img src="/static/images/Group 244.png"  style="height: 100vh;width: 50vw" >
+
+</div>
+<div class="col-sm-6">
 {% if usr%}
 
-<h1>Edit User</h1>
-<form action="{{ url_for('updateUser', usrid=usr.id) }}" method="post" enctype="multipart/form-data"></form>
+<!-- <h1>Edit User</h1> -->
+<h2>Please complete creating your account.</h2>
+<form class = "form-style-8" action="{{ url_for('updateUser', usrid=usr.id) }}" method="post" enctype="multipart/form-data"></form>
   
 <label>First Name</label><br>
   <input type="text" rows="1" cols="16" name='name' value="{{usr.name}}"><br>
@@ -28,9 +43,13 @@
 </form>
 {% else %}
 
-<h1>New User</h1>
+<!-- <h1>New User</h1> -->
+<div style="height: 25px;width: 50px;left:45%;position: relative;top:30px;">
+  <img src="/static/images/xorder_logo_svg.svg" >
+</div>
 
-<form action="{{ url_for('createUser') }}" method="post" enctype="multipart/form-data">
+<h2 class="subtitle">Please complete creating your account.</h2>
+<form class = "form-style-8" action="{{ url_for('createUser') }}" method="post" enctype="multipart/form-data">
 
   
     <label>First Name</label><br>
@@ -43,10 +62,11 @@
     <label>Password</label><br>
     <input type="password" rows="1" cols="16" name='password'><br>
     
-    <input type="submit" style="margin-top: 10px;" value="Submit">
+    <input class='form-button' type="submit" style="margin-top: 10px;" value="Submit">
 </form>
 
 {%endif%}
+</div>
 
 <div>
   <a href="{{url_for('index')}}">
@@ -54,4 +74,4 @@
   </a>
 </div>
 
-{% endblock %}
+</body>
