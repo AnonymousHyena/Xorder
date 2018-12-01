@@ -1,0 +1,48 @@
+<style>
+  .highlightme { background-color:#FF6565; }
+  { background-color:#FF6565; }
+  .maintext-font{
+    font: 130px Source Sans Pro,sans-serif;
+    font-weight: bold;
+    color: white;
+  }
+  .sans{
+  font: 35px Source Sans Pro, sans-serif;
+  font-weight: regular;
+  color: white;}
+  .sans2{
+    font: 40px Source Sans Pro, sans-serif;
+    font-weight: light;
+    color: white;}
+  .center {
+    text-align: center;}
+  .container {
+    position: relative;
+    text-align: center;
+    color: white;
+  }
+  .bottom-text {
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%, -50%);}
+  .maintext-position{
+    position: absolute;
+    top: 53%;
+    left: 50%;
+    transform: translate(-50%, -50%);}
+  .subtext-position{
+    position: absolute;
+    top: 68%;
+    left: 50%;
+    transform: translate(-50%, -50%);}
+  }
+
+}
+</style>
+<div class="container">
+  <img src="/static/images/Header_Image.png" alt="front_page_backround" width="1640px" height="1079px">
+  <span class="center"><div class="maintext-position"><span class="maintext-font">Fast Ordering</span></div></span>
+  <span class="center"><div class="subtext-position"><span class="sans2">X-order is the fastest, most efficient tool to register<br> and manage your coffee shop orders.</span></div></span>
+  <div class="bottom-text"><a href="{{url_for('newUser')}} "><span class="sans"><span class="highlightme">Get Started Now</span></span></a></div>
+</div>
