@@ -5,7 +5,7 @@ from sqlalchemy.orm import relationship, sessionmaker
 from sqlalchemy import create_engine
 
 
-engine = create_engine('sqlite:///name.db')
+engine = create_engine('sqlite:///xorder.db')
 
 Base.metadata.bind = engine
 DBSession = sessionmaker(bind = engine)

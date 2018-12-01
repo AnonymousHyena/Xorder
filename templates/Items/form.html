@@ -11,7 +11,7 @@
 {% if item%}
 
 <h1>Edit Item</h1>
-<form action="{{ url_for('updateItem', itemid=item.id) }}" method="post" enctype="multipart/form-data"></form>
+<form action="{{ url_for('items.update', itemid=item.id) }}" method="post" enctype="multipart/form-data"></form>
   
     <label>Item Name</label><br>
     <input type="text" rows="1" cols="16" name='name' value="{{item.name}}"><br>
@@ -31,7 +31,7 @@
 
 <h1>New Item</h1>
 
-<form action="{{ url_for('createItem', storeid=store, userid=user) }}" method="post" enctype="multipart/form-data">
+<form action="{{ url_for('items.create', storeid=store, userid=user) }}" method="post" enctype="multipart/form-data">
 
   
     <label>Item Name</label><br>

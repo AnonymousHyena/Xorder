@@ -3,27 +3,21 @@ body {
 	font-family: 'Source Sans Pro', sans-serif;
 	color: #000;
 }
-
 th, td {
     padding: 5px;
 }
-
 textarea.fixxxed {
     resize: none;
 }
-
 h2{
   clear: both;
-  font-family: 'Source Sans Pro', sans-serif;
 }
 input.description{
   padding: 5px 350px 100px 5px;
 }
-
 tr:nth-child(odd) {
   background-color: #f7f4f4
 }
-
 th {
   background-color: #fa9292;
   color: #fff;
@@ -34,7 +28,6 @@ th {
   padding-left: 0px;
 }
 .form-style-8{
-	font-family: 'Source Sans Pro', sans-serif;
 	width: 500px;
 	padding: 30px;
 	background: rgba(255, 255, 255, 0);
@@ -48,7 +41,6 @@ th {
   margin-left: auto;
 	  
 }
-
 .form-style-8 input[type="text"],
 .form-style-8 input[type="email"],
 .form-style-8 input[type="password"],
@@ -81,7 +73,6 @@ th {
 }
 .form-button{
   font-size: 18px;
-  font-family: 'Source Sans Pro', sans-serif;
   height: 50px;
   width: 185px;
   background-color: #43425D;
@@ -94,6 +85,7 @@ th {
   transform: translateX(20%, 20%);
   border-radius: 15px;
 }
+
 /*Header*/
 #header-nav {
   background-color: #fff;
@@ -101,15 +93,13 @@ th {
   border: 0;
   box-shadow: 0 0 2px 0 #1D1D1D;
 }
-
 #logo-img {
-  background: url('../images/xorder_logo_svg.svg') no-repeat;
+  background: url('../images/logo.svg') no-repeat;
   width: 116px;
   height: 70px;
   margin: 10px 0px 10px 0;
   background-size: 100% 100%;
 }
-
 .navbar-brand {
   padding-top: 25px;
 }
@@ -142,7 +132,6 @@ th {
   clear: both;
   margin-top: -55px;
 }
-
 #navLogInButton a{
   border: 1px solid #707070;
   border-radius: 100px;
@@ -188,23 +177,18 @@ th {
 .footer_link:hover{
   border: 1px solid #D6D6D6;
 }
-.panel-footer div.row {
+.panel-footer div.row{
 	margin-bottom: 8px;
 }
 /*End Footer*/
 
-
 /*Large devices only*/
-@media (min-width: 1200px) and (max-width:2559px){
-  .wrappper{
-    height:78vh;
-  }
-}
+@media (min-width: 1200px) and (max-width:2559px){}
 
 /********** Medium devices only **********/
-@media (min-width: 992px) and (max-width: 1199px) {
+@media (min-width: 992px) and (max-width: 1199px){
   /* Header */
-  #logo-img {
+  #logo-img{
     width: 125px;
     height: 80px;
     margin: 5px 5px 5px 0;
@@ -213,53 +197,52 @@ th {
 }
 
 /********** Small devices only **********/
-@media (min-width: 768px) and (max-width: 991px) {
-  body {
+@media (min-width: 768px) and (max-width: 991px){
+  body{
   font-size: 14px;
   }
-  .navbar-brand {
+  /* Header */
+  .navbar-brand{
     padding-top: 10px;
     height: 80px;
   }
-  #nav-list {
+  #nav-list{
     margin-top: 5px;
   }
   .navbar-nav>li>a{
     padding-right: 8px;
     padding-left: 8px;
   }
-
+  /* End Header */
 }
 
 /********** Extra small devices only **********/
 @media (max-width: 767px) {
-  body {
-  font-size: 11px;
+  body{
+    font-size: 11px;
   }
-
   h1{
     font-size: 26px;
   }
-
   /* Header */
-  .navbar-brand {
+  .navbar-brand{
     padding-top: 10px;
     height: 80px;
   }
-  .navbar-brand h1 { /* Name */
+  .navbar-brand h1{ /* Name */
     font-size: 5vw; /* 1vw = 1% of viewport width */
   }
-  #collapsable-nav a { /* Collapsed nav text */
+  #collapsable-nav a{ /* Collapsed nav text */
     font-size: 1.2em;
   }
-  #collapsable-nav a span { /* Collapsed nav glyph */
+  #collapsable-nav a span{ /* Collapsed nav glyph */
     font-size: 1em;
     margin-right: 5px;
   }
   /* End Header */
 
   /* Footer */
-  .panel-footer section {
+  .panel-footer section{
     margin-bottom: 30px;
     text-align: center;
   }

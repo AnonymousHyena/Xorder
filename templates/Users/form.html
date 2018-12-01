@@ -1,60 +1,41 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    {% block head %}
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% block title %}{% endblock %} - Xorder</title>
-    <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
-    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet" type='text/css'>
-    {% endblock %}
-  </head>
-  <body>
+{% extends "layout_clean.html" %}
+{% block title %}Index{% endblock %}
+{% block head %}
+  {{ super() }}
+{% endblock %}
+{% block content %}
 {% if error %}
     <p class="alert alert-danger"><strong>Error:</strong> {{ error }}
 {% endif %}
-
 <div id="image" class="col-sm-6">
   <img src="/static/images/Group 244.png"  style="height: 100vh;width: 50vw" >
-
 </div>
 <div class="col-sm-6">
 {% if usr%}
-
 <!-- <h1>Edit User</h1> -->
 <h2>Please complete creating your account.</h2>
-<form class = "form-style-8" action="{{ url_for('updateUser', usrid=usr.id) }}" method="post" enctype="multipart/form-data"></form>
-  
-<label>First Name</label><br>
+<form class = "form-style-8" action="{{ url_for('users.update', usrid=usr.id) }}" method="post" enctype="multipart/form-data"></form>
+  <label>First Name</label><br>
   <input type="text" rows="1" cols="16" name='name' value="{{usr.name}}"><br>
   
-
   <label>E-mail</label><br>
   <input type="email" rows="1" cols="16" name='email' value="{{usr.mail}}"><br>
   
-
   <label>Password</label><br>
   <input type="password" rows="1" cols="16"name='password' value="{{usr.password}}"><br>
   
   <input type="submit" style="margin-top: 10px;" value="Submit">
-
 </form>
 {% else %}
-
 <!-- <h1>New User</h1> -->
 <div style="height: 25px;width: 50px;left:45%;position: relative;top:30px;">
   <img src="/static/images/xorder_logo_svg.svg" >
 </div>
 
 <h2 class="subtitle">Please complete creating your account.</h2>
-<form class = "form-style-8" action="{{ url_for('createUser') }}" method="post" enctype="multipart/form-data">
-
-  
+<form class = "form-style-8" action="{{ url_for('users.create')}}" method="post" enctype="multipart/form-data">
     <label>First Name</label><br>
     <input type="text" rows="1" cols="16" name='name'><br>
-    
     
     <label>E-mail</label><br>
     <input type="email" rows="1" cols="16" name='email'><br>
@@ -74,4 +55,4 @@
   </a>
 </div>
 
-</body>
+{% endblock %}

@@ -10,22 +10,22 @@
 {% if store%}
 <h1>Edit my Shop</h1>
 
-<form action="{{url_for('updateStore', userid=usr, storeid=store.id)}}" method="post">
+<form action="{{url_for('stores.update', userid=usr, storeid=store.id)}}" method="post">
     <label>Store's Name</label><br>
     <textarea class="fixxxed" rows="1" cols="15" name="name">{{store.name}}</textarea><br>
     <label>Address</label><br>
     <textarea class="fixxxed" rows="1" cols="30" name="adress"></textarea><br>
-    <input type="submit" value="Register Now">
+    <input type="submit" value="Update">
 </form>
 {% else %}
 <h1>Register Shop</h1>
 
-<form action="{{url_for('createStore', userid=usr)}}" method="post">
+<form action="{{url_for('stores.create', userid=usr)}}" method="post">
   <label>Store's Name</label><br>
   <textarea class="fixxxed" rows="1" cols="15" name="name"></textarea><br>
   <label>Address</label><br>
   <textarea class="fixxxed" rows="1" cols="30" name="adress"></textarea><br>
-  <input type="submit" value="Update">
+  <input type="submit" value="Register">
 </form>
 {% endif %}
 <div>
