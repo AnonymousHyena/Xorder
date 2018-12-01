@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+{% block title %}Create Participant{% endblock %}
+{% block head %}
+  {{ super() }}
+{% endblock %}
+{% block content %}
+{% if error %}
+    <p class="alert alert-danger"><strong>Error:</strong> {{ error }}
+{% endif %}
+{% if item%}
+
+<h1>Edit Item</h1>
+<form action="{{ url_for('updateItem', itemid=item.id) }}" method="post" enctype="multipart/form-data"></form>
+  
+    <label>Item Name</label><br>
+    <input type="text" rows="1" cols="16" name='name' value="{{item.name}}"><br>
+    
+
+    <label>Item Description</label><br>
+    <input type="text" rows="4" cols="16" name='description' value="{{item.description}}"><br>
+    
+
+    <label>Price</label><br>
+    <input type="text" rows="1" cols="16"name='price' value="{{item.price}}"><br>
+    
+    <input type="submit" style="margin-top: 10px;" value="Submit">
+
+</form>
+{% else %}
+
+<h1>New Item</h1>
+
+<form action="{{ url_for('createItem') }}" method="post" enctype="multipart/form-data">
+
+  
+    <label>Item Name</label><br>
+    <input type="text" rows="1" cols="16" name='name'><br>
+  
+
+    <label>Item Description</label><br>
+    <input type="text" rows="4" cols="16" name='description'><br>
+  
+
+    <label>Price</label><br>
+    <input type="text" rows="1" cols="16"name='price'><br>
+  
+    
+    <input type="submit" style="margin-top: 10px;" value="Submit">
+</form>
+
+{%endif%}
+
+<div>
+  <a href="{{url_for('index')}}">
+    Back
+  </a>
+</div>
+
+{% endblock %}

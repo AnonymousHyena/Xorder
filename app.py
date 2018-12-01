@@ -21,7 +21,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-	#usr = session.query(Users).all()
+	usr = session.query(Users).all()
 	return str(session.query(Stores).filter_by(name="Tropio").one().waiters[0].id)
 
 @app.route('/user/new')
@@ -113,6 +113,57 @@ def updateUser(usrid):
 # 	except exc.IntegrityError:
 # 		session.rollback()
 # 		return render_template('Users/form.html', at=at, error=str(sys.exc_info()[1]).split(") ")[1].split(" [")[0])
+
+
+@app.route('/item/new')
+def newItem():
+	return render_template('Items/form.html')
+
+@app.route('/item/create', methods=['POST'])
+def createItem():
+	item = Items()
+	name = format(request.form['name'])
+	description = format(request.form['description'])
+	price = format(request.form['price'])
+	if name!="":
+		item.name=name
+	if description!="":
+		item.description=description
+	if price!="":
+		item.price=price
+	try:
+		session.add(item)
+		session.commit()
+		return redirect(url_for('index'))
+	except exc.IntegrityError:
+		session.rollback()
+		return render_template('Items/form.html', error=str(sys.exc_info()[1]).split(") ")[1].split(" [")[0])
+
+@app.route('/item/edit/<itemid>')
+def editItem(itemid):
+	thing = session.query(Items).filter_by(id=itemid).one()
+	return render_template('Items/form.html', item=thing)
+
+@app.route('/item/update/<itemid>', methods=['POST'])
+def updateItem(itemid):
+	thing = session.query(Items).filter_by(id=itemid).one()
+	name = format(request.form['name'])
+	description = format(request.form['description'])
+	price = format(request.form['price'])
+	
+	if name!="":
+		thing.name=name
+	if description!="":
+		thing.description=description
+	if price!="":
+		thing.price=price
+	
+	try:
+		session.commit()
+		return redirect(url_for('index'))
+	except exc.IntegrityError:
+		session.rollback()
+		return render_template('Items/form.html', item=thing, error=str(sys.exc_info()[1]).split(") ")[1].split(" [")[0])
 
 if __name__ == '__main__':
 	app.secret_key = 'super_secret_key'
