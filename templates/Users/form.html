@@ -7,21 +7,21 @@
 {% if error %}
     <p class="alert alert-danger"><strong>Error:</strong> {{ error }}
 {% endif %}
-{% if en and cr%}
+{% if usr%}
 
 <h1>Edit User</h1>
-<form action="{{ url_for('updateUser') }}" method="post" enctype="multipart/form-data"></form>
+<form action="{{ url_for('updateUser', usrid=usr.id) }}" method="post" enctype="multipart/form-data"></form>
   
 <label>First Name</label><br>
-  <input type="text" rows="1" cols="16" ><br>
+  <input type="text" rows="1" cols="16" name='name' value="{{usr.name}}"><br>
   
 
-  <label><E-mail>E-mail</E-mail></label><br>
-  <input type="email" rows="1" cols="16" ><br>
+  <label>E-mail</label><br>
+  <input type="email" rows="1" cols="16" name='email' value="{{usr.mail}}"><br>
   
 
   <label>Password</label><br>
-  <input type="password" rows="1" cols="16" ><br>
+  <input type="password" rows="1" cols="16"name='password' value="{{usr.password}}"><br>
   
   <input type="submit" style="margin-top: 10px;" value="Submit">
 
@@ -34,20 +34,22 @@
 
   
     <label>First Name</label><br>
-    <input type="text" rows="1" cols="16" ><br>
+    <input type="text" rows="1" cols="16" name='name'><br>
     
     
-    <label><E-mail>E-mail</E-mail></label><br>
-    <input type="email" rows="1" cols="16" ><br>
+    <label>E-mail</label><br>
+    <input type="email" rows="1" cols="16" name='email'><br>
     
     <label>Password</label><br>
-    <input type="password" rows="1" cols="16" ><br>
+    <input type="password" rows="1" cols="16" name='password'><br>
     
     <input type="submit" style="margin-top: 10px;" value="Submit">
 </form>
 
+{%endif%}
+
 <div>
-  <a href="{{url_for('Users')}}">
+  <a href="{{url_for('index')}}">
     Back
   </a>
 </div>
