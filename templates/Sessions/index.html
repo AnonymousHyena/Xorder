@@ -1,0 +1,73 @@
+{% extends "layout.html" %}
+{% block title %}Facilitate{% endblock %}
+{% block head %}
+  {{ super() }}
+{% endblock %}
+
+{% block content %}
+
+{% if list %}
+	<div class="wrappper">
+	<div class="container col-md-9 col-sm-8 col-xs-7 indyScroll">
+		<div id="view-select" class="hidden-xs">
+			<button onclick="$fac.toggleView(1);"><span class="glyphicon glyphicon-th-large"></span></button>
+			<button onclick="$fac.toggleView(0);"><span class="glyphicon glyphicon-th-list"></span></button>
+		</div>
+		<h1 class="text-center">Participants</h1>
+		{%for i in list%}
+			<div class="col-md-4 col-sm-6 col-xs-6 col-lg-3">
+				<div id="{{i.id|string}}" class="pax-tile">
+					<img width="200" height="200" src="/static/images/{{i.name}} {{i.surname}}.jpg" alt="{{i.name}}">
+					<span class="name">
+						{{i.name}} {{i.surname}}
+						{%if i.status==1%}
+							<span class="glyphicon glyphicon-ice-lolly"></span>
+						{%elif i.status==2%}
+							<span class="glyphicon glyphicon-baby-formula"></span>
+						{%elif i.status==3%}
+							<span class="glyphicon glyphicon-pawn"></span>
+						{%elif i.status==4%}
+							<span class="glyphicon glyphicon-sunglasses"></span>
+						{%endif%}
+					</span>
+					<span id="oneFinger" class="name glyphicon glyphicon-play" onclick="$fac.queue('{{i.name}} {{i.surname}}',1);"></span>
+					<span id="twoFingers" class="name glyphicon glyphicon-forward" onclick="$fac.queue('{{i.name}} {{i.surname}}',2);"></span>
+				</div>
+			</div>
+		{%endfor%}
+	</div>
+	<div class="col-md-3 col-sm-4 col-xs-5 indyScroll">
+		{%if finger or fingers%}
+			<h1 id="tempTitle" class="text-center" onclick="$fac.queueRes({{finger}},{{fingers}});">Resume Queue</h1>
+		{%else%}
+			<h1 class="text-center">Queue</h1>
+		{%endif%}
+		<div class="col-xs-12 text-center">
+			Total Time: <span id="totalT">00:00:00</span></div>
+		<div class="col-xs-12 text-center">
+			Speaker Time: <span id="speakerT">00:00</span></div>
+		<div class="col-xs-12">
+			<a href="#" onclick="$fac.nextSpeaker();">
+				<div id="next" class="pax-tile">
+					<img id="nextImg" width="200" height="200" src="/static/images/Jane Doe.jpg" alt="Next">
+					<span id="nextName" class="name">Jane Doe</span>
+				</div>
+			</a>
+		</div>
+		<div class="clearfix"></div>
+		<hr>
+		<div id="nextElement">
+			High Priority: 0 remaining
+			<hr>
+			Low Priority: 0 remaining
+		</div>
+	</div>
+</div>
+{% endif %}
+<script type="text/javascript">
+	document.getElementById("navSessionStartButton").innerHTML = '<a id="sessionSaver" href="/"> <span class="glyphicon glyphicon-plus"></span><span class="glyphicon glyphicon-minus"></span><br class="hidden-xs"> Add/Remove Participants</a>';
+
+	setInterval("$fac.times()",1000);
+</script>
+
+{% endblock %}
