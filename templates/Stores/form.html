@@ -7,37 +7,29 @@
 {% if error %}
 <p class="alert alert-danger"><strong>Error:</strong> {{ error }}
 {% endif %}
-{% if en and cr%}
-<h1>Owner's Register</h1>
+{% if store%}
+<h1>Edit my Shop</h1>
 
-<form action="{{ url_for('createEncounter', crea=cr)}}" method="post">
-
-    <h3>Register-Shop</h3>
+<form action="{{url_for('updateStore', userid=usr, storeid=store.id)}}" method="post">
     <label>Store's Name</label><br>
-    <textarea class="fixxxed" rows="1" cols="15" name="hitsLand">{{en.hitsLand}}</textarea><br>
+    <textarea class="fixxxed" rows="1" cols="15" name="name">{{store.name}}</textarea><br>
     <label>Address</label><br>
-    <textarea class="fixxxed" rows="1" cols="30" name="atksLand">{{en.atksLand}}</textarea><br>
-    <h4>Upload Menu</h4>
-    <label for="fileupload"> Select a file to upload</label><br>
-    <input type="file" name="fileupload" value="fileupload" id="fileupload" accept=".txt"><br><br><br>
+    <textarea class="fixxxed" rows="1" cols="30" name="adress"></textarea><br>
     <input type="submit" value="Register Now">
 </form>
 {% else %}
-<h3>Edit my Shop</h3>
+<h1>Register Shop</h1>
 
-<form action="{{url_for('updateEncounter', crea=cr, enc=en.id)}}" method="post">
+<form action="{{url_for('createStore', userid=usr)}}" method="post">
   <label>Store's Name</label><br>
-  <textarea class="fixxxed" rows="1" cols="15" name="hitsLand">{{en.hitsLand}}</textarea><br>
+  <textarea class="fixxxed" rows="1" cols="15" name="name"></textarea><br>
   <label>Address</label><br>
-  <textarea class="fixxxed" rows="1" cols="30" name="atksLand">{{en.atksLand}}</textarea><br>
-  <h4>Upload Menu</h4>
-  <label for="fileupload"> Select a file to upload</label><br>
-  <input type="file" name="fileupload" value="fileupload" id="fileupload" accept=".txt"><br><br><br>
+  <textarea class="fixxxed" rows="1" cols="30" name="adress"></textarea><br>
   <input type="submit" value="Update">
 </form>
 {% endif %}
 <div>
-  <a href="{{url_for('showCreature', crea=cr)}}">
+  <a href="{{url_for('index')}}">
     Back
   </a>
 </div>

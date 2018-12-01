@@ -21,8 +21,9 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-	usr = session.query(Users).all()
-	return str(session.query(Stores).filter_by(name="Tropio").one().waiters[0].id)
+	stre = session.query(Users).filter_by(name="Bob").one().stores[0]
+	items = session.query(Items).filter_by(store=stre).all()
+	return str(items[0].name)
 
 @app.route('/user/new')
 def newUser():
@@ -72,55 +73,51 @@ def updateUser(usrid):
 		session.rollback()
 		return render_template('Users/form.html', usr=dude, error=str(sys.exc_info()[1]).split(") ")[1].split(" [")[0])
 
-# @app.route('/store/new')
-# def newStore():
-# 	return render_template('Stores/form.html')
+@app.route('/user/<userid>/store/new')
+def newStore(userid):
+	return render_template('Stores/form.html', usr=userid)
 
-# @app.route('/store/create', methods=['POST'])
-# def createStore():
-# 	store = Store()
-# 	name = format(request.form['name'])
-# 	if name!="":
-# 		store.name=name
-# 	try:
-# 		session.add(store)
-# 		session.commit()
-# 		return redirect(url_for('index'))
-# 	except exc.IntegrityError:
-# 		session.rollback()
-# 		return render_template('Stores/form.html', error=str(sys.exc_info()[1]).split(") ")[1].split(" [")[0])
+@app.route('/user/<userid>/store/create', methods=['POST'])
+def createStore(userid):
+	store = Stores()
+	name = format(request.form['name'])
+	if name!="":
+		store.name=name
+	try:
+		session.add(store)
+		session.commit()
+		usr = session.query(Users).filter_by(id=userid).one()
+		usr.stores.append(store)
+		session.commit()
+		return redirect(url_for('index'))
+	except exc.IntegrityError:
+		session.rollback()
+		return render_template('Stores/form.html', usr=userid,error=str(sys.exc_info()[1]).split(") ")[1].split(" [")[0])
 
-# @app.route('/store/edit/<strid>')
-# def editStore(strid):
-# 	dude = session.query(Users).filter_by(id=usr).one()
-# 	return render_template('Users/form.html', us=dude)
+@app.route('/user/<userid>/store/edit/<strid>')
+def editStore(userid, strid):
+	stre = session.query(Users).filter_by(id=strid).one()
+	return render_template('Stores/form.html', usr=userid, store=stre)
 
-# @app.route('/store/update/<usr>', methods=['POST'])
-# def updateStore(usr):
-# 	us = session.query(Attribute).filter_by(id=usr).one()
-# 	name = format(request.form['name'])
-# 	mail = format(request.form['email'])
-# 	password = format(request.form['password'])
-# 	if name!="":
-# 		us.name=name
-# 	if mail!="":
-# 		us.mail=mail
-# 	if password!="":
-# 		us.password=password
-# 	try:
-# 		session.commit()
-# 		return redirect(url_for('index'))
-# 	except exc.IntegrityError:
-# 		session.rollback()
-# 		return render_template('Users/form.html', at=at, error=str(sys.exc_info()[1]).split(") ")[1].split(" [")[0])
+@app.route('/user/<userid>/store/update/<strid>', methods=['POST'])
+def updateStore(userid, strid):
+	stre = session.query(Stores).filter_by(id=strid).one()
+	name = format(request.form['name'])
+	if name!="":
+		stre.name=name
+	try:
+		session.commit()
+		return redirect(url_for('index'))
+	except exc.IntegrityError:
+		session.rollback()
+		return render_template('Stores/form.html', usr=userid, store=stre, error=str(sys.exc_info()[1]).split(") ")[1].split(" [")[0])
 
+@app.route('/user/<userid>/store/<storeid>/item/new')
+def newItem(userid,storeid):
+	return render_template('Items/form.html', user=userid ,store=storeid)
 
-@app.route('/item/new')
-def newItem():
-	return render_template('Items/form.html')
-
-@app.route('/item/create', methods=['POST'])
-def createItem():
+@app.route('/user/<userid>/store/<storeid>/item/create', methods=['POST'])
+def createItem(userid,storeid):
 	item = Items()
 	name = format(request.form['name'])
 	description = format(request.form['description'])
@@ -131,39 +128,38 @@ def createItem():
 		item.description=description
 	if price!="":
 		item.price=price
+	item.store_id = storeid
 	try:
 		session.add(item)
 		session.commit()
 		return redirect(url_for('index'))
 	except exc.IntegrityError:
 		session.rollback()
-		return render_template('Items/form.html', error=str(sys.exc_info()[1]).split(") ")[1].split(" [")[0])
+		return render_template('Items/form.html', user=userid ,store=storeid, error=str(sys.exc_info()[1]).split(") ")[1].split(" [")[0])
 
-@app.route('/item/edit/<itemid>')
-def editItem(itemid):
+@app.route('/user/<userid>/store/<storeid>/item/edit/<itemid>')
+def editItem(userid,storeid,itemid):
 	thing = session.query(Items).filter_by(id=itemid).one()
-	return render_template('Items/form.html', item=thing)
+	return render_template('Items/form.html', usr=userid, store=storeid, item=thing)
 
-@app.route('/item/update/<itemid>', methods=['POST'])
-def updateItem(itemid):
+@app.route('/user/<userid>/store/<storeid>/item/update/<itemid>', methods=['POST'])
+def updateItem(userid,storeid,itemid):
 	thing = session.query(Items).filter_by(id=itemid).one()
 	name = format(request.form['name'])
 	description = format(request.form['description'])
 	price = format(request.form['price'])
-	
 	if name!="":
 		thing.name=name
 	if description!="":
 		thing.description=description
 	if price!="":
 		thing.price=price
-	
 	try:
 		session.commit()
 		return redirect(url_for('index'))
 	except exc.IntegrityError:
 		session.rollback()
-		return render_template('Items/form.html', item=thing, error=str(sys.exc_info()[1]).split(") ")[1].split(" [")[0])
+		return render_template('Items/form.html', usr=userid, store=storeid, item=thing, error=str(sys.exc_info()[1]).split(") ")[1].split(" [")[0])
 
 if __name__ == '__main__':
 	app.secret_key = 'super_secret_key'
