@@ -21,7 +21,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-	usr = session.query(Users).all()
+	#usr = session.query(Users).all()
 	return str(session.query(Stores).filter_by(name="Tropio").one().waiters[0].id)
 
 @app.route('/user/new')

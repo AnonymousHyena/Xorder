@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+{% block title %}Index{% endblock %}
+{% block head %}
+  {{ super() }}
+{% endblock %}
+{% block content %}
+{% if error %}
+<p class="alert alert-danger"><strong>Error:</strong> {{ error }}
+{% endif %}
+{% if en and cr%}
+<h1>Owner's Register</h1>
+
+<form action="{{ url_for('createEncounter', crea=cr)}}" method="post">
+
+    <h3>Register-Shop</h3>
+    <label>Store's Name</label><br>
+    <textarea class="fixxxed" rows="1" cols="15" name="hitsLand">{{en.hitsLand}}</textarea><br>
+    <label>Address</label><br>
+    <textarea class="fixxxed" rows="1" cols="30" name="atksLand">{{en.atksLand}}</textarea><br>
+    <h4>Upload Menu</h4>
+    <label for="fileupload"> Select a file to upload</label><br>
+    <input type="file" name="fileupload" value="fileupload" id="fileupload" accept=".txt"><br><br><br>
+    <input type="submit" value="Register Now">
+</form>
+{% else %}
+<h3>Edit my Shop</h3>
+
+<form action="{{url_for('updateEncounter', crea=cr, enc=en.id)}}" method="post">
+  <label>Store's Name</label><br>
+  <textarea class="fixxxed" rows="1" cols="15" name="hitsLand">{{en.hitsLand}}</textarea><br>
+  <label>Address</label><br>
+  <textarea class="fixxxed" rows="1" cols="30" name="atksLand">{{en.atksLand}}</textarea><br>
+  <h4>Upload Menu</h4>
+  <label for="fileupload"> Select a file to upload</label><br>
+  <input type="file" name="fileupload" value="fileupload" id="fileupload" accept=".txt"><br><br><br>
+  <input type="submit" value="Update">
+</form>
+{% endif %}
+<div>
+  <a href="{{url_for('showCreature', crea=cr)}}">
+    Back
+  </a>
+</div>
+
+{% endblock %}
