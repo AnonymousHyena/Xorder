@@ -17,6 +17,11 @@ if __name__ == '__main__':
     session.query(Items).delete()
      
     user = Users()
+    user.name = 'Nick'
+    user.password = 123
+    user.mail = 'nick@tropio.com'
+    session.add(user)
+    user = Users()
     user.name = 'Bob'
     user.password = 123
     user.mail = 'bob@bobland.com'
@@ -24,8 +29,10 @@ if __name__ == '__main__':
 
     store = Stores()
     store.name = 'Tropio'
-    store.user_id = session.query(Users).filter_by(name='Bob').one().id
+    store.waiters = [session.query(Users).filter_by(name="Bob").one()]
     session.add(store)
+
+    session.query(Users).filter_by(name="Nick").one().stores = [session.query(Stores).filter_by(name="Tropio").one()]
 
     item = Items()
     item.name = 'frappe'

@@ -18,6 +18,16 @@ items_users = Table('items_users',Base.metadata,
 	Column('timestamp',Integer), #data type change to timestamp
 	UniqueConstraint('timestamp', 'item_id', 'user_id', name='UC_timestamp_item_id_user_id'))
 
+stores_users_waiters = Table('stores_users_waiters',Base.metadata,
+	Column('store_id',Integer,ForeignKey('stores.id')),
+	Column('user_id',Integer,ForeignKey('users.id')),
+	UniqueConstraint('store_id', 'user_id', name='UC_store_id_user_id_waiter'))
+
+stores_users_owners = Table('stores_users_owners',Base.metadata,
+	Column('store_id',Integer,ForeignKey('stores.id')),
+	Column('user_id',Integer,ForeignKey('users.id')),
+	UniqueConstraint('store_id', 'user_id', name='UC_store_id_user_id_owner'))
+
 class Users(Base):
 	__tablename__ = 'users'
 
@@ -26,16 +36,16 @@ class Users(Base):
 	password = Column(Integer, nullable = False)
 	mail = Column(String(25), nullable = False)
 	orders = relationship("Items", secondary = items_users)
+	admin = relationship("Stores", secondary = stores_users_waiters)
+	stores = relationship("Stores", secondary = stores_users_owners)
 
 class Stores(Base):
 	__tablename__ = 'stores'
 
 	id = Column(Integer, primary_key = True)
 	name = Column(String(15), nullable = False)
-	user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
 
-	owner = relationship(Users, uselist=False)
-
+	waiters = relationship(Users, secondary = stores_users_waiters)
 
 class Items(Base):
 	__tablename__ = 'items'

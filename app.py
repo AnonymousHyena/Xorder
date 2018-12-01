@@ -21,8 +21,9 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-	store = session.query(Stores).all()
-	return store[0].owner.name
+	usr = session.query(Users).all()
+	#return session.query(Users).filter_by(name="Nick").one().stores[0].name
+	return session.query(Stores).filter_by(name="Tropio").one().waiters[0].name
 
 if __name__ == '__main__':
 	app.secret_key = 'super_secret_key'
