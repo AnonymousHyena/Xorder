@@ -21,6 +21,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
+	# session.rollback()
 	stre = session.query(Users).filter_by(name="Bob").one().stores[0]
 	items = session.query(Items).filter_by(store=stre).all()
 	return str(stre.id)

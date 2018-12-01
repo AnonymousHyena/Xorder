@@ -1,6 +1,6 @@
 body {
 	font-size: 16px;
-	font-family: 'Oxygen', sans-serif;
+	font-family: 'Source Sans Pro', sans-serif;
 	color: #000;
 }
 
@@ -14,12 +14,22 @@ textarea.fixxxed {
 
 h2{
   clear: both;
+  font-family: 'Source Sans Pro', sans-serif;
 }
 input.description{
-  padding: 5px 400px 100px 5px;
+  padding: 5px 350px 100px 5px;
 }
 
-table
+tr:nth-child(odd) {
+  background-color: #f7f4f4
+}
+
+th {
+  background-color: #fa9292;
+  color: #fff;
+  border: 0px;
+  font-weight: bold;
+}
 
 /*Header*/
 #header-nav {
