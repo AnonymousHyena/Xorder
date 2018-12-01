@@ -1,8 +1,0 @@
-.DS_Store
-
-name.db
-static/images/*
-!static/images/Jane Doe.*
-!static/images/logo.*
-
-*.pyc
