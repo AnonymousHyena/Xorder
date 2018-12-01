@@ -1,7 +1,6 @@
 from db_setup import *
 from flask import Flask, request, render_template, jsonify, redirect, url_for, flash
 from flask import session as login_session
-from flask_uploads import UploadSet, configure_uploads, IMAGES
 from sqlalchemy.ext.declarative import declarative_base
 
 from sqlalchemy.orm import relationship, sessionmaker
@@ -23,7 +22,9 @@ app = Flask(__name__)
 def index():
 	usr = session.query(Users).all()
 	#return session.query(Users).filter_by(name="Nick").one().stores[0].name
+	
 	return session.query(Stores).filter_by(name="Tropio").one().waiters[0].name
+
 
 if __name__ == '__main__':
 	app.secret_key = 'super_secret_key'

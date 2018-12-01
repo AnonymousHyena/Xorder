@@ -1,0 +1,55 @@
+{% extends "layout.html" %}
+{% block title %}Create Participant{% endblock %}
+{% block head %}
+  {{ super() }}
+{% endblock %}
+{% block content %}
+{% if error %}
+    <p class="alert alert-danger"><strong>Error:</strong> {{ error }}
+{% endif %}
+{% if en and cr%}
+
+<h1>Edit User</h1>
+<form action="{{ url_for('updateUser') }}" method="post" enctype="multipart/form-data"></form>
+  
+<label>First Name</label><br>
+  <input type="text" rows="1" cols="16" ><br>
+  
+
+  <label><E-mail>E-mail</E-mail></label><br>
+  <input type="email" rows="1" cols="16" ><br>
+  
+
+  <label>Password</label><br>
+  <input type="password" rows="1" cols="16" ><br>
+  
+  <input type="submit" style="margin-top: 10px;" value="Submit">
+
+</form>
+{% else %}
+
+<h1>New User</h1>
+
+<form action="{{ url_for('createUser') }}" method="post" enctype="multipart/form-data">
+
+  
+    <label>First Name</label><br>
+    <input type="text" rows="1" cols="16" ><br>
+    
+    
+    <label><E-mail>E-mail</E-mail></label><br>
+    <input type="email" rows="1" cols="16" ><br>
+    
+    <label>Password</label><br>
+    <input type="password" rows="1" cols="16" ><br>
+    
+    <input type="submit" style="margin-top: 10px;" value="Submit">
+</form>
+
+<div>
+  <a href="{{url_for('Users')}}">
+    Back
+  </a>
+</div>
+
+{% endblock %}
