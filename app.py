@@ -7,9 +7,9 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 
-from users import blueprint as blueprint_users
-from stores import blueprint as blueprint_stores
-from items import blueprint as blueprint_items
+from blues.users import blueprint as blueprint_users
+from blues.stores import blueprint as blueprint_stores
+from blues.items import blueprint as blueprint_items
 
 engine = create_engine('sqlite:///name.db')
 
@@ -25,9 +25,14 @@ app.register_blueprint(blueprint_items, url_prefix='/user/<userid>/store/<storei
 @app.route('/')
 def index():
 	# session.rollback()
-	stre = session.query(Users).filter_by(name="Bob").one().stores[0]
-	items = session.query(Items).filter_by(store=stre).all()
-	return str(stre.id)
+	# stre = session.query(Users).filter_by(name="Bob").one().stores[0]
+	# items = session.query(Items).filter_by(store=stre).all()
+	# return str(stre.id)
+	return render_template('index.html')
+
+@app.route('/login')
+def login():
+	pass
 
 if __name__ == '__main__':
 	app.secret_key = 'super_secret_key'

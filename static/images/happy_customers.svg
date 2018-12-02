@@ -1,0 +1,15 @@
+<svg id="happy_customers" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 142.742 142.742">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #ff6565;
+      }
+    </style>
+  </defs>
+  <g id="Layer_1" data-name="Layer 1" transform="translate(0 0)">
+    <path id="Path_17" data-name="Path 17" class="cls-1" d="M71.371,9.913A61.458,61.458,0,1,1,9.913,71.371,61.458,61.458,0,0,1,71.371,9.913m0-9.913a71.3,71.3,0,1,0,50.488,20.883A71.371,71.371,0,0,0,71.371,0Z" transform="translate(0 0)"/>
+    <path id="Path_18" data-name="Path 18" class="cls-1" d="M59.658,86.7A45.184,45.184,0,0,1,14.6,41.1V37.5h90.115v3.6A45.184,45.184,0,0,1,59.658,86.7ZM19.647,43.087A39.65,39.65,0,0,0,59.658,80.575,39.65,39.65,0,0,0,99.669,43.087Z" transform="translate(11.713 30.086)"/>
+    <circle id="Ellipse_1" data-name="Ellipse 1" class="cls-1" cx="7.209" cy="7.209" r="7.209" transform="translate(35.685 42.714)"/>
+    <circle id="Ellipse_2" data-name="Ellipse 2" class="cls-1" cx="7.209" cy="7.209" r="7.209" transform="translate(93.179 42.714)"/>
+  </g>
+</svg>

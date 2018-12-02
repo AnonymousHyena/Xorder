@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+{% block title %}Index{% endblock %}
+{% block head %}
+  {{ super() }}
+{% endblock %}
+{% block content %}
+<div class="row jumbatron text-center">
+	<h1>Fast Ordering</h1>
+	<div class="subtitle">X-order is the fastest, most efficient tool to register and manage your coffee sho orders</div>
+	<div class="getstarted"><a href="{{url_for('users.new')}}">Get Started Now</a></div>
+</div>
+<div id="features"class="row">
+	<div class="col-md-10 col-md-offset-1">
+		<div class="col-md-4">
+			<img src="/static/images/track_sales.svg">
+			<div class="feature_subtitle">Track Sales</div>
+		</div>
+		<div class="col-md-4">
+			<img src="/static/images/manage_orders.svg">
+			<div class="feature_subtitle">Manage Orders</div>
+		</div>
+		<div class="col-md-4">
+			<img src="/static/images/happy_customers.svg">
+			<div class="feature_subtitle">Increase Customer Satisfaction</div>
+		</div>
+	</div>
+</div>
+<h2 class="text-center">Our Customers</h2>
+<div id="customers"class="row">
+	<div class="col-md-10 col-md-offset-1">
+		<div class="col-md-4 text-center">
+			<img src="/static/images/happy_customers.svg" width="118px" height="107px">
+		</div>
+		<div class="col-md-4 text-center">
+			<img src="/static/images/happy_customers.svg" width="118px" height="107px">
+		</div>
+		<div class="col-md-4 text-center">
+			<img src="/static/images/happy_customers.svg" width="118px" height="107px">
+		</div>	
+	</div>
+</div>
+<div id="second" class="getstarted text-center"><a href="{{url_for('users.new')}}">Get Started Now</a></div>
+{% endblock %}

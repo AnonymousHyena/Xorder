@@ -31,13 +31,13 @@
           <div id="collapsable-nav" class="collapse navbar-collapse">
            <ul id="nav-list" class="nav navbar-nav navbar-right">
             <li id="navLogInButton">
-              <a href="/"> Log In</a>
+              <a href="{{url_for('login')}}">Log In</a>
             </li>
             <li id="or">
               or
             </li> 
             <li id="navSignUpButton">
-              <a href="/">Sign Up</a>
+              <a href="{{url_for('users.new')}}">Sign Up</a>
             </li>
            </ul>
           </div>
