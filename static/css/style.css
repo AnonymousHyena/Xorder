@@ -145,8 +145,8 @@ th {
   background-color: #f0f0f0;
   position: absolute;
   height: 359px;
-  width: 6000px;
-  left: -2000px;
+  width: 100vw;
+  left: 0;
   z-index: -1;
 }
 #features img{
@@ -278,6 +278,9 @@ input:focus{
     padding-left: 8px;
   }
   /* End Header */
+  .feature_subtitle{
+    width: 118px;
+  }
 }
 
 /********** Extra small devices only **********/
