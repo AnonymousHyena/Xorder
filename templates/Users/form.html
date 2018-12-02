@@ -7,52 +7,45 @@
 {% if error %}
     <p class="alert alert-danger"><strong>Error:</strong> {{ error }}
 {% endif %}
-<div id="image" class="col-sm-6">
-  <img src="/static/images/Group 244.png"  style="height: 100vh;width: 50vw" >
-</div>
-<div class="col-sm-6">
-{% if usr%}
-<!-- <h1>Edit User</h1> -->
-<h2>Please complete creating your account.</h2>
-<form class = "form-style-8" action="{{ url_for('users.update', usrid=usr.id) }}" method="post" enctype="multipart/form-data"></form>
-  <label>First Name</label><br>
-  <input type="text" rows="1" cols="16" name='name' value="{{usr.name}}"><br>
-  
-  <label>E-mail</label><br>
-  <input type="email" rows="1" cols="16" name='email' value="{{usr.mail}}"><br>
-  
-  <label>Password</label><br>
-  <input type="password" rows="1" cols="16"name='password' value="{{usr.password}}"><br>
-  
-  <input type="submit" style="margin-top: 10px;" value="Submit">
-</form>
-{% else %}
-<!-- <h1>New User</h1> -->
-<div style="height: 25px;width: 50px;left:45%;position: relative;top:30px;">
-  <img src="/static/images/xorder_logo_svg.svg" >
+
+<div class="col-sm-6 hidden-xs banner">
+  <img src="/static/images/Group_244@2x.png" width="100%">
 </div>
 
-<h2 class="subh">Please complete creating your account.</h2>
-<form class = "form-style-8" action="{{ url_for('users.create')}}" method="post" enctype="multipart/form-data">
-    <label>First Name</label><br>
-    <input type="text" rows="1" cols="16" name='name'><br>
-    
-    <label>E-mail</label><br>
-    <input type="email" rows="1" cols="16" name='email'><br>
-    
-    <label>Password</label><br>
-    <input type="password" rows="1" cols="16" name='password'><br>
-    
-    <input class='form-button' type="submit" style="margin-top: 10px;" value="Submit">
-</form>
+<div class="col-sm-6 col-xs-12 text-center">
 
-{%endif%}
-</div>
+  <div id="logo">
+    <img src="/static/images/logo.svg" width="50px" height="105px">
+  </div>
 
-<div>
-  <a href="{{url_for('index')}}">
-    Back
-  </a>
+  <h1 class="subh">Please complete creating your account.</h1>
+
+  {% if usr%}
+    <form action="{{url_for('users.update', usrid=usr.id)}}" method="post" enctype="multipart/form-data"></form>
+      <input type="text" rows="1" placeholder="Name" name="name" value="{{usr.name}}"><br>
+    
+      <input type="email" rows="1" placeholder="Email" name="email" value="{{usr.mail}}"><br>
+    
+      <input type="password" rows="1" placeholder="Password" name="password" value="{{usr.password}}"><br>
+      
+      <input class='form-button' type="submit" value="Submit">
+    </form>
+  {% else %}
+    <form action="{{url_for('users.create')}}" method="post" enctype="multipart/form-data">
+      <input type="text" rows="1" placeholder="Name" name="name"><br>
+    
+      <input type="email" rows="1" placeholder="Email" name="email"><br>
+    
+      <input type="password" rows="1" placeholder="Password" name="password"><br>
+        
+      <input class='form-button' type="submit" value="Sign up">
+    </form>
+  {%endif%}
+  <div id="signin">
+    <a href="{{url_for('login')}}">
+      Already have an account? Sign in.
+    </a>
+  </div>
 </div>
 
 {% endblock %}
