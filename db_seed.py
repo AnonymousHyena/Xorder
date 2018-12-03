@@ -18,21 +18,21 @@ if __name__ == '__main__':
      
     user = Users()
     user.name = 'Nick'
-    user.password = 123
+    user.password = '123'
     user.mail = 'nick@tropio.com'
     session.add(user)
     user = Users()
     user.name = 'Bob'
-    user.password = 123
+    user.password = '123'
     user.mail = 'bob@bobland.com'
     session.add(user)
 
     store = Stores()
     store.name = 'Tropio'
-    store.waiters = [session.query(Users).filter_by(name="Bob").one()]
+    store.waiters = [session.query(Users).filter_by(mail="bob@bobland.com").one()]
     session.add(store)
 
-    session.query(Users).filter_by(name="Nick").one().stores = [session.query(Stores).filter_by(name="Tropio").one()]
+    session.query(Users).filter_by(mail="nick@tropio.com").one().stores = [session.query(Stores).filter_by(name="Tropio").one()]
 
     item = Items()
     item.name = 'frappe'

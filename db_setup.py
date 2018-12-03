@@ -33,8 +33,8 @@ class Users(Base):
 
 	id = Column(Integer, primary_key = True)
 	name = Column(String(15), nullable = False)
-	password = Column(Integer, nullable = False)
-	mail = Column(String(25), nullable = False)
+	password = Column(String(15), nullable = False)
+	mail = Column(String(25), nullable = False, unique = True)
 	orders = relationship("Items", secondary = items_users)
 	admin = relationship("Stores", secondary = stores_users_waiters)
 	stores = relationship("Stores", secondary = stores_users_owners)

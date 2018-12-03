@@ -21,7 +21,7 @@
   <h1 class="subh">Please complete creating your account.</h1>
 
   {% if usr%}
-    <form action="{{url_for('users.update', usrid=usr.id)}}" method="post" enctype="multipart/form-data"></form>
+    <form action="{{url_for('users.update', usrid=usr.id)}}" method="post" enctype="multipart/form-data">
       <input type="text" rows="1" placeholder="Name" name="name" value="{{usr.name}}"><br>
     
       <input type="email" rows="1" placeholder="Email" name="email" value="{{usr.mail}}"><br>
@@ -38,11 +38,12 @@
     
       <input type="password" rows="1" placeholder="Password" name="password"><br>
         
-      <input class='form-button' type="submit" value="Sign up">
+      <input class='form-button col-sm-3' type="submit" value="Sign up">
     </form>
   {%endif%}
+  <div class="clearfix"></div>
   <div id="signin">
-    <a href="{{url_for('login')}}">
+    <a href="{{url_for('showLogin')}}">
       Already have an account? Sign in.
     </a>
   </div>

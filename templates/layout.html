@@ -30,8 +30,13 @@
 
           <div id="collapsable-nav" class="collapse navbar-collapse">
            <ul id="nav-list" class="nav navbar-nav navbar-right">
+            {%if 'name' in session%}
+            <li id="">
+              <a href="{{url_for('disconnect')}}">{{session['name']}}</a>
+            </li>
+            {%else%}
             <li id="navLogInButton">
-              <a href="{{url_for('login')}}">Log In</a>
+              <a href="{{url_for('showLogin')}}">Log In</a>
             </li>
             <li id="or">
               or
@@ -40,6 +45,7 @@
               <a href="{{url_for('users.new')}}">Sign Up</a>
             </li>
            </ul>
+           {%endif%}
           </div>
         </div><!-- .container -->
       </nav><!-- #header-nav -->
@@ -60,10 +66,10 @@
     
     <footer class="panel-footer">
         <div class="container">
-          <div class="row col-md-offset-4 col-md-4">
-            <div class="col-md-4 text-center footer_link">About</div>
-            <div class="col-md-4 text-center footer_link">Contact Us</div>
-            <div class="col-md-4 text-center footer_link">Blog</div>
+          <div class="row col-sm-offset-4 col-sm-4">
+            <div class="col-sm-4 text-center footer_link">About</div>
+            <div class="col-sm-4 text-center footer_link">Contact Us</div>
+            <div class="col-sm-4 text-center footer_link">Blog</div>
           </div>
           <div class="clearfix"></div>
           <div class="row">

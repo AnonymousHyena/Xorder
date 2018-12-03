@@ -145,7 +145,7 @@ th {
   background-color: #f0f0f0;
   position: absolute;
   height: 359px;
-  width: 100vw;
+  width: 100%;
   left: 0;
   z-index: -1;
 }
@@ -178,9 +178,12 @@ h2{
 /**/
 .banner>img{
   height: 100vh;
+  width: 50vw;
+  position: absolute;
+  left: -30vw;
 }
 #logo{
-margin-top: 75px;
+  margin-top: 10%;
 }
 .subh{
   font-size: 18px;
@@ -189,14 +192,33 @@ margin-top: 75px;
   margin-bottom: 32px;
 }
 .form-button{
-  font-size: 18px;
-  height: 50px;
-  width: 185px;
+  font-size: 13px;
+  height: 38px;
+  float: inherit;
   background-color: #43425D;
   color: #FFF;
   margin: 0;
   border-radius: 4px;
   border: 1px solid #43425D;
+}
+.form-button-negative{
+  font-size: 13px;
+  height: 38px;
+  float: inherit;
+  background-color: #fff;
+  color: #43425D;
+  margin: 0;
+  border-radius: 4px;
+  border: 1px solid #43425D;
+  display: inline-block;
+  padding-top: 9px;
+}
+.form-button-negative:hover{
+  text-decoration: none;
+  color: #43425D;
+}
+#signin{
+  margin-top: 15px;
 }
 #signin a{
   text-decoration: underline;
@@ -247,7 +269,17 @@ input:focus{
 /*End Footer*/
 
 /*Large devices only*/
-@media (min-width: 1200px) and (max-width:2559px){}
+@media (min-width: 1850px) and (max-width:2559px){
+  .banner>img{
+      left: -28vw;
+    }
+}
+
+@media (min-width: 1200px) and (max-width:1849px){
+  .banner>img{
+      left: -20vw;
+    }
+}
 
 /********** Medium devices only **********/
 @media (min-width: 992px) and (max-width: 1199px){
@@ -258,6 +290,9 @@ input:focus{
     margin: 5px 5px 5px 0;
   }
   /* End Header */
+  .banner>img{
+      left: -15vw;
+    }
 }
 
 /********** Small devices only **********/
@@ -281,6 +316,9 @@ input:focus{
   .feature_subtitle{
     width: 118px;
   }
+  .banner>img{
+      left: -18vw;
+    }
 }
 
 /********** Extra small devices only **********/

@@ -1,7 +1,9 @@
 from db_setup import *
 from flask import Blueprint, request, render_template, redirect, url_for
+from flask import session as login_session
+
 from sqlalchemy.orm import sessionmaker
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, exc
 
 engine = create_engine('sqlite:///xorder.db')
 
@@ -10,6 +12,10 @@ DBSession = sessionmaker(bind = engine)
 session = DBSession()
 
 blueprint = Blueprint('users',__name__)
+
+@blueprint.route('/profile')
+def show():
+	return render_template('Users/show.html')
 
 @blueprint.route('/new')
 def new():
@@ -30,7 +36,9 @@ def create():
 	try:
 		session.add(usr)
 		session.commit()
-		return redirect(url_for('index'))
+		login_session['name'] = name
+		login_session['email'] = mail
+		return redirect(url_for('users.show'))
 	except exc.IntegrityError:
 		session.rollback()
 		return render_template('Users/form.html', error=str(sys.exc_info()[1]).split(") ")[1].split(" [")[0])

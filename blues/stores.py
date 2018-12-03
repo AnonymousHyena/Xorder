@@ -1,7 +1,7 @@
 from db_setup import *
 from flask import Blueprint, request, render_template, redirect, url_for
 from sqlalchemy.orm import sessionmaker
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, exc
 
 engine = create_engine('sqlite:///xorder.db')
 
