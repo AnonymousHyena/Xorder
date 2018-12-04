@@ -19,15 +19,11 @@ session = DBSession()
 
 app = Flask(__name__)
 app.register_blueprint(blueprint_users, url_prefix='/user')
-app.register_blueprint(blueprint_stores, url_prefix='/user/<userid>/store')
-app.register_blueprint(blueprint_items, url_prefix='/user/<userid>/store/<storeid>/item')
+app.register_blueprint(blueprint_stores, url_prefix='/store')
+app.register_blueprint(blueprint_items, url_prefix='/store/<storeid>/item')
 
 @app.route('/')
 def index():
-	# session.rollback()
-	# stre = session.query(Users).filter_by(name="Bob").one().stores[0]
-	# items = session.query(Items).filter_by(store=stre).all()
-	# return str(stre.id)
 	if 'name' in login_session:
 		return redirect(url_for('users.show'))
 	return render_template('index.html')

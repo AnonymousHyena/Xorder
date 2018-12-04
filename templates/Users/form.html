@@ -1,34 +1,20 @@
 {% extends "layout_clean.html" %}
-{% block title %}Index{% endblock %}
+{% block title %}Users{% endblock %}
 {% block head %}
   {{ super() }}
 {% endblock %}
 {% block content %}
-{% if error %}
-    <p class="alert alert-danger"><strong>Error:</strong> {{ error }}
-{% endif %}
-
-<div class="col-sm-6 hidden-xs banner">
-  <img src="/static/images/Group_244@2x.png" width="100%">
-</div>
-
-<div class="col-sm-6 col-xs-12 text-center">
-
-  <div id="logo">
-    <img src="/static/images/logo.svg" width="50px" height="105px">
-  </div>
-
   <h1 class="subh">Please complete creating your account.</h1>
 
   {% if usr%}
-    <form action="{{url_for('users.update', usrid=usr.id)}}" method="post" enctype="multipart/form-data">
+    <form action="{{url_for('users.update')}}" method="post" enctype="multipart/form-data">
       <input type="text" rows="1" placeholder="Name" name="name" value="{{usr.name}}"><br>
     
       <input type="email" rows="1" placeholder="Email" name="email" value="{{usr.mail}}"><br>
     
       <input type="password" rows="1" placeholder="Password" name="password" value="{{usr.password}}"><br>
       
-      <input class='form-button' type="submit" value="Submit">
+      <input class='form-button col-sm-3' type="submit" value="Submit">
     </form>
   {% else %}
     <form action="{{url_for('users.create')}}" method="post" enctype="multipart/form-data">
@@ -47,6 +33,4 @@
       Already have an account? Sign in.
     </a>
   </div>
-</div>
-
 {% endblock %}

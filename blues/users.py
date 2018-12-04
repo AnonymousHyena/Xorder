@@ -43,14 +43,14 @@ def create():
 		session.rollback()
 		return render_template('Users/form.html', error=str(sys.exc_info()[1]).split(") ")[1].split(" [")[0])
 
-@blueprint.route('/edit/<usrid>')
-def edit(usrid):
-	dude = session.query(Users).filter_by(id=usrid).one()
+@blueprint.route('/edit')
+def edit():
+	dude = session.query(Users).filter_by(mail=login_session['email']).one()
 	return render_template('Users/form.html', usr=dude)
 
-@blueprint.route('/update/<usrid>', methods=['POST'])
-def update(usrid):
-	dude = session.query(Users).filter_by(id=usrid).one()
+@blueprint.route('/update', methods=['POST'])
+def update():
+	dude = session.query(Users).filter_by(mail=login_session['email']).one()
 	name = format(request.form['name'])
 	mail = format(request.form['email'])
 	password = format(request.form['password'])
@@ -65,4 +65,4 @@ def update(usrid):
 		return redirect(url_for('index'))
 	except exc.IntegrityError:
 		session.rollback()
-		return render_template('Users/form.html', usr=dude, error=str(sys.exc_info()[1]).split(") ")[1].split(" [")[0])
+		return render_template('Users/form.html', error=str(sys.exc_info()[1]).split(") ")[1].split(" [")[0])

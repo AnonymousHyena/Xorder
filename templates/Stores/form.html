@@ -1,37 +1,27 @@
-{% extends "layout.html" %}
-{% block title %}Index{% endblock %}
+{% extends "layout_clean.html" %}
+{% block title %}Stores{% endblock %}
 {% block head %}
   {{ super() }}
 {% endblock %}
 {% block content %}
-{% if error %}
-<p class="alert alert-danger"><strong>Error:</strong> {{ error }}
-{% endif %}
-{% if store%}
-<h1>Edit my Shop</h1>
+  <h1 class="subh">Please enter your coffee shop's information to complete your registration.</h1>
 
-<form action="{{url_for('stores.update', userid=usr, storeid=store.id)}}" method="post">
-    <label>Store's Name</label><br>
-    <textarea class="fixxxed" rows="1" cols="15" name="name">{{store.name}}</textarea><br>
-    <label>Address</label><br>
-    <textarea class="fixxxed" rows="1" cols="30" name="adress"></textarea><br>
-    <input type="submit" value="Update">
-</form>
-{% else %}
-<h1>Register Shop</h1>
+  {% if store%}
+    <form action="{{url_for('stores.update', storeid=store.id)}}" method="post">
+      <input type="text" rows="1" placeholder="Coffee Shop's Name" name="name" value="{{store.name}}"><br>
 
-<form action="{{url_for('stores.create', userid=usr)}}" method="post">
-  <label>Store's Name</label><br>
-  <textarea class="fixxxed" rows="1" cols="15" name="name"></textarea><br>
-  <label>Address</label><br>
-  <textarea class="fixxxed" rows="1" cols="30" name="adress"></textarea><br>
-  <input type="submit" value="Register">
-</form>
-{% endif %}
-<div>
-  <a href="{{url_for('index')}}">
-    Back
-  </a>
-</div>
-
+      <input type="submit" class="form-button col-sm-3" value="Update">
+    </form>
+  {% else %}
+    <form action="{{url_for('stores.create')}}" method="post">
+      <input type="text" rows="1" placeholder="Coffee Shop's Name Name" name="name"><br>
+      <input type="submit" class="form-button col-sm-3" value="Register Now">
+    </form>
+  {% endif %}
+  <div class="clearfix"></div>
+  <div id="signin">
+    <a href="{{url_for('index')}}">
+      Back
+    </a>
+  </div>
 {% endblock %}

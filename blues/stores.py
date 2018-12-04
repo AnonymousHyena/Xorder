@@ -1,5 +1,7 @@
 from db_setup import *
 from flask import Blueprint, request, render_template, redirect, url_for
+from flask import session as login_session
+
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine, exc
 
@@ -12,11 +14,12 @@ session = DBSession()
 blueprint = Blueprint('stores',__name__)
 
 @blueprint.route('/new')
-def new(userid):
-	return render_template('Stores/form.html', usr=userid)
+def new():
+	return render_template('Stores/form.html')
 
 @blueprint.route('/create', methods=['POST'])
-def create(userid):
+def create():
+	dude = session.query(Users).filter_by(mail=login_session['email']).one()
 	store = Stores()
 	name = format(request.form['name'])
 	if name!="":
@@ -24,21 +27,20 @@ def create(userid):
 	try:
 		session.add(store)
 		session.commit()
-		usr = session.query(Users).filter_by(id=userid).one()
-		usr.stores.append(store)
+		dude.stores.append(store)
 		session.commit()
 		return redirect(url_for('index'))
 	except exc.IntegrityError:
 		session.rollback()
-		return render_template('Stores/form.html', usr=userid,error=str(sys.exc_info()[1]).split(") ")[1].split(" [")[0])
+		return render_template('Stores/form.html', usr=dude.id, error=str(sys.exc_info()[1]).split(") ")[1].split(" [")[0])
 
 @blueprint.route('/edit/<strid>')
-def edit(userid, strid):
+def edit(strid):
 	stre = session.query(Users).filter_by(id=strid).one()
-	return render_template('Stores/form.html', usr=userid, store=stre)
+	return render_template('Stores/form.html', store=stre)
 
 @blueprint.route('/update/<strid>', methods=['POST'])
-def update(userid, strid):
+def update(strid):
 	stre = session.query(Stores).filter_by(id=strid).one()
 	name = format(request.form['name'])
 	if name!="":
@@ -48,4 +50,4 @@ def update(userid, strid):
 		return redirect(url_for('index'))
 	except exc.IntegrityError:
 		session.rollback()
-		return render_template('Stores/form.html', usr=userid, store=stre, error=str(sys.exc_info()[1]).split(") ")[1].split(" [")[0])
+		return render_template('Stores/form.html', store=stre, error=str(sys.exc_info()[1]).split(") ")[1].split(" [")[0])

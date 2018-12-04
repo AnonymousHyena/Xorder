@@ -12,12 +12,12 @@ session = DBSession()
 blueprint = Blueprint('items',__name__)
 
 @blueprint.route('/new')
-def new(userid,storeid):
+def new(storeid):
 	items = session.query(Items).filter_by(store_id=storeid).all()
-	return render_template('Items/form.html', user=userid ,store=storeid, itm=items)
+	return render_template('Items/form.html', store=storeid, itm=items)
 
 @blueprint.route('/create', methods=['POST'])
-def create(userid,storeid):
+def create(storeid):
 	item = Items()
 	name = format(request.form['name'])
 	description = format(request.form['description'])
@@ -35,15 +35,15 @@ def create(userid,storeid):
 		return redirect(url_for('index'))
 	except exc.IntegrityError:
 		session.rollback()
-		return render_template('Items/form.html', user=userid ,store=storeid, error=str(sys.exc_info()[1]).split(") ")[1].split(" [")[0])
+		return render_template('Items/form.html' ,store=storeid, error=str(sys.exc_info()[1]).split(") ")[1].split(" [")[0])
 
 @blueprint.route('/edit/<itemid>')
-def edit(userid,storeid,itemid):
+def edit(storeid,itemid):
 	thing = session.query(Items).filter_by(id=itemid).one()
-	return render_template('Items/form.html', usr=userid, store=storeid, item=thing)
+	return render_template('Items/form.html', store=storeid, item=thing)
 
 @blueprint.route('/update/<itemid>', methods=['POST'])
-def update(userid,storeid,itemid):
+def update(storeid,itemid):
 	thing = session.query(Items).filter_by(id=itemid).one()
 	name = format(request.form['name'])
 	description = format(request.form['description'])
@@ -59,4 +59,4 @@ def update(userid,storeid,itemid):
 		return redirect(url_for('index'))
 	except exc.IntegrityError:
 		session.rollback()
-		return render_template('Items/form.html', usr=userid, store=storeid, item=thing, error=str(sys.exc_info()[1]).split(") ")[1].split(" [")[0])
+		return render_template('Items/form.html', store=storeid, item=thing, error=str(sys.exc_info()[1]).split(") ")[1].split(" [")[0])

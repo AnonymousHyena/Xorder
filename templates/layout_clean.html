@@ -12,7 +12,25 @@
     {% endblock %}
   </head>
   <body>
-    <div id="content" class="container">{% block content %}{% endblock %}</div>
+    <div id="content" class="container">
+      <div class="col-sm-6 hidden-xs banner">
+        <img src="/static/images/Group_244@2x.png" width="100%">
+      </div>
+
+      <div class="col-sm-6 col-xs-12 text-center">
+        {% if error %}
+          <p class="alert alert-danger"><strong>Error:</strong> {{ error }}</p>
+        {% endif %}
+
+        <div id="logo">
+          <a href="/">
+            <img src="/static/images/logo.svg" width="50px" height="105px">
+          </a>
+        </div>
+
+        {% block content %}{% endblock %}
+      </div>
+    </div>
   </body>
   {% block footer %}
     <script type="text/javascript" src="{{url_for('static', filename='js/jquery-2.1.4.min.js')}}"></script>
