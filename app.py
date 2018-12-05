@@ -17,7 +17,6 @@ engine = create_engine('sqlite:///xorder.db')
 
 Base.metadata.bind = engine
 DBSession = sessionmaker(bind = engine)
-session = DBSession()
 
 app = Flask(__name__, instance_relative_config=True)
 app.config.from_object('config')
@@ -36,6 +35,7 @@ def index():
 def showLogin():
 	form = LoginForm()
 	if form.validate_on_submit():
+		session = DBSession()
 		email = form.email.data
 		try:
 			dude = session.query(Users).filter_by(mail=email).one()
@@ -54,4 +54,4 @@ def disconnect():
 	return redirect(url_for('index'))
 
 if __name__ == '__main__':
-	app.run(host = '0.0.0.0',port=5000)
+	app.run(host = '0.0.0.0',port=5000,threaded=True)

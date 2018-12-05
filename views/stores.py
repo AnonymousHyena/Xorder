@@ -11,12 +11,12 @@ engine = create_engine('sqlite:///xorder.db')
 
 Base.metadata.bind = engine
 DBSession = sessionmaker(bind = engine)
-session = DBSession()
 
 blueprint = Blueprint('stores',__name__)
 
 @blueprint.route('/show/<strid>')
 def show(strid):
+	session = DBSession()
 	dude = session.query(Users).filter_by(mail=login_session['email']).one()
 	store = session.query(Stores).filter_by(id=strid).one()
 	if store in dude.stores:
@@ -27,6 +27,7 @@ def show(strid):
 def new():
 	form = RegisterShopForm()
 	if form.validate_on_submit():
+		session = DBSession()
 		dude = session.query(Users).filter_by(mail=login_session['email']).one()
 		store = Stores()
 		store.name = form.name.data

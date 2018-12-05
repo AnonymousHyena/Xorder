@@ -8,15 +8,14 @@ from sqlalchemy import create_engine, exc
 from forms import SignUpForm
 
 engine = create_engine('sqlite:///xorder.db')
-
 Base.metadata.bind = engine
 DBSession = sessionmaker(bind = engine)
-session = DBSession()
 
 blueprint = Blueprint('users',__name__)
 
 @blueprint.route('/profile')
 def show():
+	session = DBSession()
 	stores = session.query(Users).filter_by(mail=login_session['email']).one().stores
 	return render_template('Users/show.html', strs=stores)
 
@@ -24,6 +23,7 @@ def show():
 def new():
 	form = SignUpForm()
 	if form.validate_on_submit():
+		session = DBSession()
 		dude = Users()
 		dude.name = form.name.data
 		dude.mail = form.email.data
