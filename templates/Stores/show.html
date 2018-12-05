@@ -1,9 +1,25 @@
 {% extends "layout.html" %}
-{% block title %}Index{% endblock %}
+{% block title %}{{str.name}}{% endblock %}
 {% block head %}
   {{ super() }}
 {% endblock %}
 {% block content %}
+
+<div class="col-sm-2 menu">
+	<div id="title">x-order</div>
+	<ul class="nav">
+		<li><span class="glyphicon glyphicon-home"></span> Orders</li>
+		<li><span class="glyphicon glyphicon-user"></span> Customers</li>
+		<li><span class="glyphicon glyphicon-stats"></span> Statistics</li>
+		<li><span class="glyphicon glyphicon-cog"></span> Edit Shop</li>
+	</ul>
+</div>
+<div class="col-sm-10">
+	<h2>Orders</h2>
+	<table>
+		
+	</table>
+</div>
 
 
 {% endblock %}

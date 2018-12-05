@@ -1,0 +1,29 @@
+{% extends "layout_clean.html" %}
+{% block title %}Sign Up{% endblock %}
+{% block head %}
+  {{ super() }}
+{% endblock %}
+{% block content %}
+
+  <h1 class="subh">Please complete creating your account.</h1>
+
+  <form action="" method="post" enctype="multipart/form-data">
+    {{form.name(placeholder='Name')}} <br>
+    {{form.email(placeholder='Email')}} <br>
+    {{form.password(placeholder='Password')}} <br>
+    {{form.confirm_password(placeholder='Confirm Password')}} <br>
+    
+    {{form.csrf_token}}
+    
+    <input class='form-button col-sm-3' type="submit" value="Sign up">
+  </form>
+
+  <div class="clearfix"></div>
+
+  <div id="signin">
+    <a href="{{url_for('showLogin')}}">
+      Already have an account? Sign in.
+    </a>
+  </div>
+
+{% endblock %}

@@ -1,16 +1,17 @@
 {% extends "layout_clean.html" %}
-{% block title %}Index{% endblock %}
+{% block title %}Login{% endblock %}
 {% block head %}
   {{ super() }}
 {% endblock %}
 {% block content %}
   <h1 class="subh">Welcome back! Please login to your account.</h1>
 
-	<form action="{{url_for('connect')}}" method="post" enctype="multipart/form-data">    
-    	<input type="email" rows="1" placeholder="E-mail" name="email"><br>
-    
-      	<input type="password" rows="1" placeholder="Password" name="password"><br>
+	<form action="" method="post" enctype="multipart/form-data">   
+		{{form.email(placeholder='Email')}} <br>
+		{{form.password(placeholder='Password')}} <br>
+
 	  	<div class="col-sm-8 col-sm-offset-2">
+	  		{{form.csrf_token}}
       		<input class='form-button col-sm-5' type="submit" value="Login">
       		<div>
 	    		<a class="form-button-negative col-sm-5" href="{{url_for('users.new')}}">
