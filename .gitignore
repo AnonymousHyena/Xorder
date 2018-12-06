@@ -4,3 +4,4 @@ xorder.db
 instance/
 
 *.pyc
+*.sh
