@@ -6,6 +6,7 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy import exc
 
 from ..forms import SignUpForm, LoginForm
+from ..util.security import ts, send_email
 
 DBSession = sessionmaker(bind = engine)
 
@@ -53,8 +54,39 @@ def new():
 			session.commit()
 			login_session['name'] = form.name.data
 			login_session['email'] = form.email.data
+
+			subject = 'Confirm your email'
+			token = ts.dumps(form.email.data, salt='email-confirm-key')
+
+			confirm_url = url_for(
+				'users.confirm_mail',
+				token=token,
+				_external=True)
+
+			html = render_template(
+				'email/activate.html',
+				confirm_url=confirm_url)
+
+			#send_email(form.email.data,subject,html)
+			#confiramtion mail feature disabled for practivcal reasons but functional
+
 			return redirect(url_for('users.show'))
 		except exc.IntegrityError:
 			session.rollback()
 			return render_template('Users/signup.html', form=form, error=str(sys.exc_info()[1]).split(") ")[1].split(" [")[0])
 	return render_template('Users/signup.html', form=form)
+
+@blueprint.route('/confirm/<token>')
+def confirm_mail(token):
+	try:
+		email = ts.load(token, salt='email-confirm-key', max_age=86400)
+	except:
+		return redirect(url_for('users.login'))
+
+	session = DBSession()
+
+	user = session.query(Users).filter_by(mail=email).one()
+	user.confirm_mail = True
+
+	session.commit()
+	return redirect(url_for('users.login'))

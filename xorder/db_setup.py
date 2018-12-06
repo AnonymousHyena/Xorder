@@ -2,7 +2,7 @@
 import sys
 import os
 
-from sqlalchemy import Column, ForeignKey, Integer, String, Float, Table, UniqueConstraint
+from sqlalchemy import Column, ForeignKey, Integer, String, Float, Boolean, Table, UniqueConstraint
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 from sqlalchemy import create_engine
@@ -35,6 +35,7 @@ class Users(Base):
 	name = Column(String(15), nullable = False)
 	password = Column(String(15), nullable = False)
 	mail = Column(String(25), nullable = False, unique = True)
+	mail_confirmed = Column(Boolean,nullable = False, default=False)
 	orders = relationship("Items", secondary = items_users)
 	admin = relationship("Stores", secondary = stores_users_waiters)
 	stores = relationship("Stores", secondary = stores_users_owners)
