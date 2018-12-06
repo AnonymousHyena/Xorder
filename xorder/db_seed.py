@@ -4,9 +4,6 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, sessionmaker
 from sqlalchemy import create_engine
 
-engine = create_engine('sqlite:///xorder/xorder.db')
-
-Base.metadata.bind = engine
 DBSession = sessionmaker(bind = engine)
 session = DBSession()
 
@@ -39,7 +36,5 @@ if __name__ == '__main__':
     item.store_id = session.query(Stores).filter_by(name="Tropio").one().id
 
     session.add(item)
-
-
 
     session.commit()

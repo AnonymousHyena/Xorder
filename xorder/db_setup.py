@@ -4,8 +4,13 @@ import os
 
 from sqlalchemy import Column, ForeignKey, Integer, String, Float, Boolean, Table, UniqueConstraint
 from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.orm import relationship
 from sqlalchemy import create_engine
+
+from flask_login import UserMixin
+
+from . import bcrypt
 
 Base = declarative_base()
 
@@ -28,17 +33,28 @@ stores_users_owners = Table('stores_users_owners',Base.metadata,
 	Column('user_id',Integer,ForeignKey('users.id')),
 	UniqueConstraint('store_id', 'user_id', name='UC_store_id_user_id_owner'))
 
-class Users(Base):
+class Users(Base, UserMixin):
 	__tablename__ = 'users'
 
 	id = Column(Integer, primary_key = True)
-	name = Column(String(15), nullable = False)
-	password = Column(String(15), nullable = False)
-	mail = Column(String(25), nullable = False, unique = True)
+	name = Column(String(25), nullable = False)
+	_password = Column(String(128), nullable = False)
+	mail = Column(String(45), nullable = False, unique = True)
 	mail_confirmed = Column(Boolean,nullable = False, default=False)
 	orders = relationship("Items", secondary = items_users)
 	admin = relationship("Stores", secondary = stores_users_waiters)
 	stores = relationship("Stores", secondary = stores_users_owners)
+
+	@hybrid_property
+	def password(self):
+		return self._password
+
+	@password.setter
+	def password(self, plaintext):
+		self._password = bcrypt.generate_password_hash(plaintext)
+
+	def is_correct_password(self,plaintext):
+		return bcrypt.check_password_hash(self._password, plaintext)
 
 class Stores(Base):
 	__tablename__ = 'stores'

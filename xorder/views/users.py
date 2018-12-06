@@ -1,6 +1,7 @@
 from ..db_setup import *
 from flask import Blueprint, request, render_template, redirect, url_for
-from flask import session as login_session
+
+from flask_login import login_user, login_required, current_user, logout_user
 
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import exc
@@ -13,35 +14,35 @@ DBSession = sessionmaker(bind = engine)
 blueprint = Blueprint('users',__name__)
 
 @blueprint.route('/profile')
+@login_required
 def show():
-	session = DBSession()
-	stores = session.query(Users).filter_by(mail=login_session['email']).one().stores
-	return render_template('Users/show.html', strs=stores)
+	return render_template('Users/show.html', strs=current_user.stores)
 
 @blueprint.route('/login', methods=['POST', 'GET'])
-def showLogin():
+def login():
 	form = LoginForm()
 	if form.validate_on_submit():
 		session = DBSession()
 		email = form.email.data
 		try:
 			dude = session.query(Users).filter_by(mail=email).one()
-			if dude.password == form.password.data:
-				login_session['name'] = dude.name
-				login_session['email'] = dude.mail
+			if dude.is_correct_password(form.password.data):
+				login_user(dude)
 				return redirect(url_for('users.show'))
-			return render_template('login.html', form=form)
-		except:
-			return render_template('login.html',form=form,error='User not found')
-	return render_template('login.html', form=form)
+			return render_template('Users/login.html', form=form)
+		except exc.IntegrityError:
+			print(str(sys.exc_info()[1]).split(") ")[1].split(" [")[0])
+			return render_template('Users/login.html',form=form,error='User not found')
+	return render_template('Users/login.html', form=form)
 		
 @blueprint.route('/disconnect')
-def disconnect():
-	del login_session['name']
+@login_required
+def logout():
+	logout_user()
 	return redirect(url_for('index.index'))
 
 @blueprint.route('/signup', methods=['POST', 'GET'])
-def new():
+def signup():
 	form = SignUpForm()
 	if form.validate_on_submit():
 		session = DBSession()
@@ -52,8 +53,6 @@ def new():
 		try:
 			session.add(dude)
 			session.commit()
-			login_session['name'] = form.name.data
-			login_session['email'] = form.email.data
 
 			subject = 'Confirm your email'
 			token = ts.dumps(form.email.data, salt='email-confirm-key')
@@ -68,9 +67,9 @@ def new():
 				confirm_url=confirm_url)
 
 			#send_email(form.email.data,subject,html)
-			#confiramtion mail feature disabled for practivcal reasons but functional
+			#confiramtion mail feature disabled for practical reasons but functional
 
-			return redirect(url_for('users.show'))
+			return redirect(url_for('users.login'))
 		except exc.IntegrityError:
 			session.rollback()
 			return render_template('Users/signup.html', form=form, error=str(sys.exc_info()[1]).split(") ")[1].split(" [")[0])
