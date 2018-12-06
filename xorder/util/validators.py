@@ -1,12 +1,10 @@
 from wtforms.validators import ValidationError
-from db_setup import *
+from ..db_setup import *
 
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 
-engine = create_engine('sqlite:///xorder.db')
-Base.metadata.bind = engine
 DBSession = sessionmaker(bind = engine)
 
 class Unique(object):

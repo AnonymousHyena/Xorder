@@ -32,11 +32,11 @@
            <ul id="nav-list" class="nav navbar-nav navbar-right">
             {%if 'name' in session%}
             <li id="">
-              <a href="{{url_for('disconnect')}}">{{session['name']}}</a>
+              <a href="{{url_for('users.disconnect')}}">{{session['name']}}</a>
             </li>
             {%else%}
             <li id="navLogInButton">
-              <a href="{{url_for('showLogin')}}">Log In</a>
+              <a href="{{url_for('users.showLogin')}}">Log In</a>
             </li>
             <li id="or">
               or

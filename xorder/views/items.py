@@ -1,12 +1,11 @@
-from db_setup import *
+from ..db_setup import *
 from flask import Blueprint, request, render_template, redirect, url_for
+
 from sqlalchemy.orm import sessionmaker
-from sqlalchemy import create_engine, exc
+from sqlalchemy import exc
 
-engine = create_engine('sqlite:///xorder.db')
-
-Base.metadata.bind = engine
 DBSession = sessionmaker(bind = engine)
+
 session = DBSession()
 
 blueprint = Blueprint('items',__name__)

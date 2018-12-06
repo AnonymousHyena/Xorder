@@ -59,6 +59,6 @@ class Items(Base):
 	store = relationship(Stores, uselist=False)
 
 
-engine = create_engine('sqlite:///xorder.db')
+engine = create_engine('sqlite:///xorder/xorder.db')
 
 Base.metadata.create_all(engine)
